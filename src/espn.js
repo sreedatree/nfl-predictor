@@ -136,7 +136,9 @@ const pair = (s) => {
 };
 
 function parseTeamBox(t) {
-  const m = new Map((t.statistics ?? []).map((s) => [s.name, s.displayValue])); // first occurrence wins
+  // ESPN repeats some stat names (e.g. "interceptions"); keep the first occurrence.
+  const m = new Map();
+  for (const s of t.statistics ?? []) if (!m.has(s.name)) m.set(s.name, s.displayValue);
   const num = (k) => Number(String(m.get(k) ?? "").replace(/,/g, "")) || 0;
   const [mm, ss] = String(m.get("possessionTime") ?? "0:0").split(":").map(Number);
   const [thirdConv, thirdAtt] = pair(m.get("thirdDownEff"));
@@ -268,4 +270,4 @@ async function getScoreboard(season, seasonType, week) {
   return getJson(`${BASE}/scoreboard?${q}`, 60 * 1000);
 }
 
-module.exports = { getTeams, getGames, getScoreboard, attachGameData, getEventOdds, getInjuries, getDepthChart, pool };
+module.exports = { getTeams, getGames, getScoreboard, attachGameData, getEventOdds, getInjuries, getDepthChart, pool, parseOdds, parseTeamBox };
