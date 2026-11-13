@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NFL Game Predictor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <h1>NFL Game Predictor</h1>
+      <div class="controls">
+        <label for="week">Week</label>
+        <select id="week"></select>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="summary" class="summary" aria-live="polite"></section>
+    <p id="status" class="status" role="status">Loading games…</p>
+    <section id="games" class="games" aria-label="Game predictions"></section>
+    <footer class="foot">
+      <p>
+        Data from ESPN. Predictions blend the model (Elo ratings from 3 seasons of results, season scoring margin,
+        recent form, head-to-head history, rest, and per-game box-score stats: yards per game, yards per play,
+        time of possession, sacks, interceptions, turnover margin and injuries to starters) with the current betting line. Entertainment only, not betting advice.
+      </p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
