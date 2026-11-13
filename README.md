@@ -21,6 +21,25 @@ The first start downloads about 420 box scores and betting lines, which takes a 
 two. They are cached in `.cache/gamedata.json`, so later starts only fetch new games.
 Use the week dropdown to move between regular season weeks and playoff rounds.
 
+## Tests
+
+```bash
+npm test
+```
+
+Uses Node's built-in test runner, so there is nothing extra to install. The tests use made-up
+data and never touch the network. They cover:
+
+- **Injury math** (`src/lineup.js`): value per position, chance of missing a game by report
+  status, discount for long-term absences, the 10-point cap and replacement players.
+- **Model** (`src/model.js`): Elo updates, home field, head-to-head, the box-score factors and
+  season totals (defensive sacks, defensive interceptions, turnover differential),
+  the betting-line blend and the injury adjustment.
+- **Backtest integrity**: a pick never uses the result of its own game or any later game.
+- **ESPN parsing** (`src/espn.js`): the home-line sign convention and box-score fields.
+
+GitHub Actions runs the same tests on Node 20, 22 and 24 for every push to `main` and every pull request.
+
 ## What you see
 
 For each game:
@@ -96,6 +115,8 @@ src/espn.js       ESPN client: schedules, box scores, lines, injuries, depth cha
 src/model.js      Elo, factors, market blend and backtest
 src/lineup.js     Depth chart + injury report -> lineup and injury cost
 public/           Static front end (index.html, app.js, style.css)
+test/             Unit tests (npm test)
+.github/          CI workflow
 .cache/           Box scores and lines for finished games (gitignored)
 ```
 
@@ -115,3 +136,7 @@ the week's record.
 Schedules, the injury report and depth charts are cached in memory for 10 to 30 minutes.
 Betting lines for upcoming games are cached for 5 minutes. Restart the server to clear
 all caches.
+
+## License
+
+[MIT](LICENSE)

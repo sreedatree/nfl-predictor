@@ -326,7 +326,7 @@ class Model {
     let spread = modelSpread;
     let market = null;
     if (g.odds && Number.isFinite(g.odds.spread)) {
-      const mSpread = -g.odds.spread; // ESPN gives the home line (negative = home favoured)
+      const mSpread = 0 - g.odds.spread; // ESPN gives the home line (negative = home favoured); "0 -" avoids -0
       spread = modelSpread * (1 - MARKET_WEIGHT) + mSpread * MARKET_WEIGHT;
       const homeAbbr = this.teams.get(homeId)?.abbr ?? "HOME";
       const awayAbbr = this.teams.get(awayId)?.abbr ?? "AWAY";
