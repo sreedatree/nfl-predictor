@@ -9,6 +9,7 @@ All data comes from ESPN's public endpoints, so no API key is needed.
 Requires Node.js 18 or newer.
 
 ```bash
+git clone https://github.com/sreedatree/nfl-predictor.git
 cd nfl-predictor
 npm install
 npm start
